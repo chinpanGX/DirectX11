@@ -51,9 +51,9 @@ struct LIGHT
 	D3DXCOLOR	Ambient;
 };
 
-class CVertexBuffer;
-class CIndexBuffer;
-class CTexture;
+class VertexBuffer;
+class IndexBuffer;
+class Texture;
 
 class Renderer
 {
