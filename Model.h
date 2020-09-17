@@ -6,6 +6,7 @@
 --------------------------------------------------------------*/
 #pragma once
 #include <vector>
+#include "Renderer.h"
 
 // マテリアル構造体
 struct MODEL_MATERIAL
@@ -54,7 +55,7 @@ public:
 	static std::vector<std::string> m_FileName;
 	enum ModelFileName
 	{
-
+		MODEL_PLAYER
 	};
 
 	static void Init();

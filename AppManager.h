@@ -9,6 +9,7 @@
 class AppManager
 {
 private:
+	static class Scene* m_Scene;
 	void SetLight();
 public:
 	void Init();

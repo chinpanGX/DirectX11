@@ -5,7 +5,11 @@
 
 ---------------------------------------------------------------*/
 #include "AppManager.h"
+#include <time.h>
 #include "Renderer.h"
+#include "Scene.h"
+
+Scene* AppManager::m_Scene = NULL;
 
 void AppManager::SetLight()
 {
@@ -21,7 +25,9 @@ void AppManager::SetLight()
 
 void AppManager::Init()
 {
+	srand((unsigned int)time(NULL));
 	Renderer::Init();
+	Model::Init();
 }
 
 void AppManager::Uninit()
@@ -31,12 +37,13 @@ void AppManager::Uninit()
 
 void AppManager::Update()
 {
-
+	m_Scene->Update();
 }
 
 void AppManager::Draw()
 {
 	Renderer::Begin();
 	SetLight();
+	m_Scene->Draw();
 	Renderer::End();
 }

@@ -345,7 +345,7 @@ void Model::Init()
 {
 	HANDLE hFind;
 	WIN32_FIND_DATA win32fd;
-	std::string search_name = +"Rom\\Model\\*.obj";
+	std::string search_name = + "Rom\\Model\\*.obj";
 	hFind = FindFirstFile(search_name.c_str(), &win32fd); // ファイル検索
 	// ファイルが見つからなかったとき
 	if (hFind = INVALID_HANDLE_VALUE)
@@ -359,7 +359,7 @@ void Model::Init()
 		{
 			m_FileName.push_back(win32fd.cFileName);
 		}
-	} while (FindNextFile);
+	} while (FindNextFile(hFind, &win32fd));
 	FindClose(hFind); // 開けたら閉じる
 	// 参照するために前にファイル名を付けていく
 	for (unsigned int i = 0; i < m_FileName.size(); i++)
