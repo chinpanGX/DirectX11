@@ -1,6 +1,7 @@
 /*------------------------------------------------------------
 	
-	[InputDevice.h]
+	[InputDevice.h] 
+	キーボード、ゲームパッド、マウスを管理
 	Author : 出合翔太
 
 -------------------------------------------------------------*/
@@ -21,30 +22,31 @@
 #define RANGE_MIN	(-1000)	// 有効範囲の最小値
 
 //ゲームパッド（XboxとPS4）の入力のマクロ
-#define LEFTSTICK_UP		 (0x00000001l) //	PS4	Xbox : 左スティック上(.IY<0)
-#define LEFTSTICK_DOWN		 (0x00000002l) //	PS4	Xbox : 左スティック下(.IY>0)
-#define LEFTSTICK_LEFT		 (0x00000004l) //	PS4	Xbox : 左スティック左(.IX<0)
-#define LEFTSTICK_RIGHT		 (0x00000008l) //	PS4	Xbox : 左スティック右(.IX>0)
-#define BUTTON_UP			 (0x00400000l) //	PS4	Xbox : 方向キー上(rgdwPOV[0] = 0)
-#define BUTTON_DOWN			 (0x00800000l) //	PS4	Xbox : 方向キー下(.rgdwPOV[0] = 18000)
-#define BUTTON_LEFT			 (0x01000000l) //	PS4	Xbox : 方向キー左(.rgdwPOV[0] = 27000)
-#define BUTTON_RIGHT		 (0x02000000l) //	PS4	Xbox : 方向キー右(.rgdwPOV[0] = 9000)
+#define LS_UP		(0x00000001l) // PS4	Xbox : 左スティック上(.IY<0)
+#define LS_DOWN		(0x00000002l) // PS4	Xbox : 左スティック下(.IY>0)
+#define LS_LEFT		(0x00000004l) // PS4	Xbox : 左スティック左(.IX<0)
+#define LS_RIGHT	(0x00000008l) // PS4	Xbox : 左スティック右(.IX>0)
+#define POV_UP		(0x00400000l) // PS4	Xbox : 方向キー上(rgdwPOV[0] = 0)
+#define POV_DOWN	(0x00800000l) // PS4	Xbox : 方向キー下(.rgdwPOV[0] = 18000)
+#define POV_LEFT	(0x01000000l) // PS4	Xbox : 方向キー左(.rgdwPOV[0] = 27000)
+#define POV_RIGHT	(0x02000000l) // PS4	Xbox : 方向キー右(.rgdwPOV[0] = 9000)
+				 
+#define BTN_1		(0x00008000l) // PS4 ： △ボタン	  Xbox : Ｙボタン(.rgbButtons[3]&0x80)
+#define BTN_2		(0x00004000l) // PS4 ： 〇ボタン	  Xbox : Ｘボタン(.rgbButtons[2]&0x80)
+#define BTN_3		(0x00002000l) // PS4 ： ×ボタン	  Xbox : Ｂボタン(.rgbButtons[1]&0x80)
+#define BTN_4		(0x00001000l) // PS4 ： □ボタン	  Xbox : Ａボタン(.rgbButtons[0]&0x80)
+#define BTN_L1		(0x00010000l) // PS4 ： L1ボタン	  Xbox : LBボタン(.rgbButtons[4]&0x80)
+#define BTN_R1		(0x00020000l) // PS4 ： R1ボタン	  Xbox : RBボタン(.rgbButtons[5]&0x80)
+#define BTN_L2		(0x00000400l) // PS4 : L2トリガー(.lRx>10000)
+#define BTN_R2		(0x00000800l) // PS4 : R2トリガー(.lRy>10000)
+
+#define BTN_OPTION	(0x00040000l) // PS4 ： OPTIONボタン  Xbox : BACKボタン(.rgbButtons[6]&0x80)
+#define BTN_SHARE	(0x00080000l) // PS4 ： SHAREボタン	  Xbox : STARTボタン(.rgbButtons[7]&0x80)
 							 
-#define BUTTON_1			 (0x00008000l) //	PS4 ： △ボタン		 Xbox : Ｙボタン(.rgbButtons[3]&0x80)
-#define BUTTON_2			 (0x00004000l) //	PS4 ： 〇ボタン		 Xbox : Ｘボタン(.rgbButtons[2]&0x80)
-#define BUTTON_3			 (0x00002000l) //	PS4 ： ×ボタン		 Xbox : Ｂボタン(.rgbButtons[1]&0x80)
-#define BUTTON_4			 (0x00001000l) //	PS4 ： □ボタン		 Xbox : Ａボタン(.rgbButtons[0]&0x80)
-#define BUTTON_LB			 (0x00010000l) //	PS4 ： L1ボタン		 Xbox : LBボタン(.rgbButtons[4]&0x80)
-#define BUTTON_RB			 (0x00020000l) //	PS4 ： R1ボタン		 Xbox : RBボタン(.rgbButtons[5]&0x80)
-#define BUTTON_BACK			 (0x00040000l) //	PS4 ： OPTIONボタン	 Xbox : BACKボタン(.rgbButtons[6]&0x80)
-#define BUTTON_START		 (0x00080000l) //	PS4 ： SHAREボタン	 Xbox : STARTボタン(.rgbButtons[7]&0x80)
-							 
-#define PS4RIGHTSTICK_UP	 (0x00000010l) // PS4 : 右スティック上(.lRz<16383)
-#define PS4RIGHTSTICK_DOWN	 (0x00000020l) // PS4 : 右スティック下(.lRz>49150)
-#define PS4RIGHTSTICK_RIGHT	 (0x00000040l) // PS4 : 右スティック右(.lZ<16383)
-#define PS4RIGHTSTICK_LEFT	 (0x00000080l) // PS4 : 右スティック左(.lZ>49150)
-#define TRIGGER_L2			 (0x00000400l) //	PS4 : L2トリガー(.lRx>10000)
-#define TRIGGER_R2			 (0x00000800l) //	PS4 : R2トリガー(.lRy>10000)
+#define RS_UP		(0x00000010l) // PS4 : 右スティック上(.lRz<16383)
+#define RS_DOWN		(0x00000020l) // PS4 : 右スティック下(.lRz>49150)
+#define RS_RIGHT	(0x00000040l) // PS4 : 右スティック右(.lZ<16383)
+#define RS_LEFT		(0x00000080l) // PS4 : 右スティック左(.lZ>49150)
 							 
 #define XboxRIGHTSTICK_UP	 (0x04000000l) // Xbox : 右スティック上(.lRz<16383)
 #define XboxRIGHTSTICK_DOWN	 (0x10000000l) // Xbox : 右スティック下(.lRz>49150)
@@ -52,8 +54,8 @@
 #define XboxRIGHTSTICK_RIGHT (0x40000000l) // Xbox : 右スティック左(.lZ>49150
 #define TRIGGER_LT			 (0x00000100l) // Xbox : LTトリガー(.lZ>49150)
 #define TRIGGER_RT			 (0x00000200l) // Xbox : RTトリガー(.lZ<16383)
-#define BUTTON_L3			 (0x00100000l) //	Xbox : L3ボタン(.rgbButtons[8]&0x80)
-#define BUTTON_R3			 (0x00200000l) //	Xbox : R3ボタン(.rgbButtons[9]&0x80)
+#define BUTTON_L3			 (0x00100000l) // Xbox : L3ボタン(.rgbButtons[8]&0x80)
+#define BUTTON_R3			 (0x00200000l) // Xbox : R3ボタン(.rgbButtons[9]&0x80)
 
 #define GAMEPADMAX (4) // 同時に接続するジョイパッドの最大数をセット
 
