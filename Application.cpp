@@ -5,8 +5,8 @@
 
 ----------------------------------------------------------*/
 #include "Application.h"
-#include "AppManager.h"
 #include "InputDevice.h"
+#include "AppManager.h"
 
 // グローバル変数
 const unsigned int g_WindowWidth = 1280;
@@ -83,7 +83,7 @@ void Application::AppRun()
 	dwExecLastTime = timeGetTime();
 	dwCurrentTime = 0;
 
-	m_mgr.Init();
+	AppManager::Init();
 
 	// メッセージループ
 	MSG msg;
@@ -110,9 +110,9 @@ void Application::AppRun()
 				dwExecLastTime = dwCurrentTime;
 				// 更新処理
 				InputDevice::Update(); // コントローラの更新
-				m_mgr.Update();
+				AppManager::Update();
 				// 描画処理
-				m_mgr.Draw();
+				AppManager::Draw();
 			}
 		}
 	}
@@ -120,7 +120,7 @@ void Application::AppRun()
 
 void Application::Uninit()
 {
-	m_mgr.Uninit();
+	AppManager::Uninit();
 	InputDevice::Uninit();  // コントローラの終了処理 
 	timeEndPeriod(1); // 分解能を戻す
 	UnregisterClass(m_WindowClass.lpszClassName, m_WindowClass.hInstance); // ウィンドウクラスの登録を解除

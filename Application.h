@@ -32,14 +32,11 @@
 #pragma comment(lib,"dxgi.lib")
 #pragma comment(lib,"d3dcompiler.lib")
 
-#include "AppManager.h"
-
 class Application
 {
 private:
 	WNDCLASSEX	m_WindowClass;
 	HWND		m_hWnd;
-	AppManager	m_mgr;
 
 	void CreateGameWindow(HWND& hwnd, WNDCLASSEX& windowClass); // ゲーム用ウィンドウ
 	Application() {};	// コンストラクタ
