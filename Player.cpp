@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "Model.h"
 #include "Renderer.h"
+#include "InputDevice.h"
 
 void Player::Init()
 {
@@ -17,7 +18,6 @@ void Player::Init()
 	m_Position = D3DXVECTOR3(0.0f, 0.5f, 0.0f);
 	m_Rotation = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_Scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
-
 	D3DXQuaternionIdentity(&m_Quaternion);
 }
 
@@ -29,6 +29,10 @@ void Player::Uninit()
 
 void Player::Update()
 {
+	//マウスによるプレイヤー制御
+	m_Rotation.y += Mouse::GetMouseX() / 200;
+	//正規化
+	D3DXQuaternionNormalize(&m_Quaternion, &m_Quaternion);
 }
 
 void Player::Draw()

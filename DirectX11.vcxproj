@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="AppManager.cpp" />
+    <ClCompile Include="Bg.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="InputDevice.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="AppManager.h" />
     <ClInclude Include="BaseGameObject.h" />
+    <ClInclude Include="Bg.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="InputDevice.h" />
     <ClInclude Include="Model.h" />
@@ -182,6 +184,9 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="マクロメモ.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

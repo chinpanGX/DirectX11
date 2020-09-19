@@ -1,6 +1,7 @@
 /*--------------------------------------------------------------
 	
 	[Scene.h]
+	シーン関連の処理を管理
 	Author : 出合翔太
 
 ---------------------------------------------------------------*/
@@ -11,22 +12,47 @@
 #include <string>
 
 #include "BaseGameObject.h"
-#include "Model.h"
+#include "Bg.h"
 
-enum layer :int
+enum layer : int
 {
 	LAYER_CAMERA,
+	LAYER_2D,
 	LAYER_3D,
 	LAYER_MAX
 };
+
+#pragma region Declare_Class_Fade
+class Fade : public BG
+{
+private:
+	float m_Alpha = 1.0f;	// a値
+public:
+	enum FadeState
+	{
+		FADE_NONE,
+		FADE_IN,
+		FADE_OUT
+	};
+	FadeState m_FadeState = FADE_NONE;
+	static class Scene* m_NextScene;
+
+	Fade() {}
+	~Fade() {}
+	void Init();
+	void Uninit();
+	void Update();
+	void Draw();
+};
+#pragma endregion Fadeクラスの宣言
 
 #pragma region Declare_Class_Scene
 class Scene
 {
 protected:
 	std::list<GameObject*> m_GameObject[LAYER_MAX];
-	virtual void Load() = 0;
-	virtual void Unload() = 0;
+	virtual void Load() = 0;	// ロード
+	virtual void Unload() = 0;	// アンロード
 public:
 	Scene() {}
 	virtual ~Scene() {}
@@ -48,6 +74,10 @@ public:
 	// 更新処理
 	virtual void Update()
 	{
+		for (GameObject* object : m_GameObject[LAYER_CAMERA])
+		{
+			object->Update();
+		}
 		for (GameObject* object : m_GameObject[LAYER_3D])
 		{
 			object->Update();
@@ -56,9 +86,9 @@ public:
 		{
 			// ラムダ式（無名関数）
 			m_GameObject[i].remove_if([](GameObject* object)
-			{
-				return object->Destroy();
-			}
+				{
+					return object->Destroy();
+				}
 			);
 		}
 	}
@@ -73,17 +103,18 @@ public:
 			}
 		}
 	}
-
+	
+	// 追加
 	template <typename T>
 	T* AddGameObject(int layer)
 	{
 		T* gameObject = new T();
 		m_GameObject[layer].push_back(gameObject);
 		gameObject->Init();
-
 		return gameObject;
 	}
-	
+
+	// ゲッター
 	template<typename T>
 	T* GetGameObject(int layer)
 	{
@@ -94,7 +125,6 @@ public:
 		}
 		return NULL;
 	}
-
 	template<typename T>
 	std::vector<T*>GetGameObjects(int layer)
 	{
@@ -107,7 +137,6 @@ public:
 		return objects;
 	}
 };
-
 #pragma endregion Sceneクラスの宣言
 
 #pragma region Declare_Class_Game-public_Scene
@@ -122,3 +151,21 @@ public:
 	void Draw()override;
 };
 #pragma endregion Gameクラスの宣言：Sceneクラスを継承
+
+#pragma region Declare_class_Title-public_Scene
+class Title : public Scene
+{
+protected:
+	void Load()override;
+	void Unload()override;
+public:
+	void Init()override;
+	void Uninit()override;
+	void Update()override;
+	void Draw()override;
+};
+#pragma endregion Titleクラスの宣言:Sceneクラスを継承 
+
+
+
+

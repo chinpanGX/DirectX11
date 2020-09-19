@@ -37,7 +37,7 @@ public:
 	void SetDestroy() { m_Destroy = true; }
 	bool Destroy()
 	{
-		if (m_Destroy = true)
+		if (m_Destroy == true)
 		{
 			Uninit();
 			delete this;
@@ -101,4 +101,3 @@ public:
 		return vector;
 	}
 };
-

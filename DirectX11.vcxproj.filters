@@ -45,6 +45,9 @@
     <ClCompile Include="Camera.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Bg.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -77,6 +80,9 @@
     <ClInclude Include="Camera.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Bg.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="pixelShader.cso" />
@@ -85,5 +91,8 @@
   <ItemGroup>
     <FxCompile Include="pixelShader.hlsl" />
     <FxCompile Include="vertexShader.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="マクロメモ.txt" />
   </ItemGroup>
 </Project>

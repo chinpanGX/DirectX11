@@ -1,6 +1,7 @@
 /*------------------------------------------------------------
 	
 	[Renderer.h]
+	DirectX11‚ÌŠÖ˜Aˆ—‚ğŠÇ—
 	Author : o‡ãÄ‘¾
 
 -------------------------------------------------------------*/
@@ -50,10 +51,6 @@ struct LIGHT
 	D3DXCOLOR	Diffuse;
 	D3DXCOLOR	Ambient;
 };
-
-class VertexBuffer;
-class IndexBuffer;
-class Texture;
 
 class Renderer
 {

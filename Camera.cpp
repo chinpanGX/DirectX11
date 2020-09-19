@@ -6,7 +6,9 @@
 ---------------------------------------------------------------*/
 #include "Camera.h"
 #include "Renderer.h"
-#include "Application.h"
+#include "AppManager.h"
+#include "Player.h"
+#include "InputDevice.h"
 
 // ‰Šú‰»
 void Camera::Init()
@@ -17,7 +19,46 @@ void Camera::Init()
 
 void Camera::Update()
 {
+	/*
+	Player* player = AppManager::GetScene()->GetGameObject<Player>(LAYER_3D);
 
+	m_Target = player->GetPosition();
+	m_Position = player->GetPosition() + player->GetVector(VECTOR_BACKWARD) * 4.0f + D3DXVECTOR3(0.0f, 2.0f, 0.0f);
+
+	if (m_Position.x > 19.0f)
+		m_Position.x = 19.0f;
+	if (m_Position.x < -19.0f)
+		m_Position.x = -19.0f;
+
+	if (m_Position.z > 19.0f)
+		m_Position.z = 19.0f;
+	if (m_Position.z < -19.0f)
+		m_Position.z = -19.0f;
+		*/
+	if (KeyBoard::IsPress(DIK_W))
+	{
+		m_Position.z -= 1.0f;
+	}
+	else if (KeyBoard::IsPress(DIK_S))
+	{
+		m_Position.z += 1.0f;
+	}
+	else if (KeyBoard::IsPress(DIK_A))
+	{
+		m_Position.x -= 1.0f;
+	}
+	else if (KeyBoard::IsPress(DIK_D))
+	{
+		m_Position.x += 1.0f;
+	}
+	else if(KeyBoard::IsPress(DIK_Q))
+	{
+		m_Position.y += 1.0f;
+	}
+	else if (KeyBoard::IsPress(DIK_E))
+	{
+		m_Position.y -= 1.0f;
+	}
 }
 
 void Camera::Draw()
