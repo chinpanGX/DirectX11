@@ -49,13 +49,20 @@ private:
 	SUBSET* m_SubsetArray;
 	unsigned int m_SubsetNum;
 
-	void LaodObject(const char* FileName, MODEL* Model);
-	void LaodMaterial(const char* FileName, MODEL_MATERIAL** MaterialArray, unsigned int* MaterialNum);
+	void LoadObject(const char* FileName, MODEL* Model);
+	void LoadMaterial(const char* FileName, MODEL_MATERIAL** MaterialArray, unsigned int* MaterialNum);
 public:
 	static std::vector<std::string> m_FileName;
 	enum ModelFileName
 	{
-		MODEL_PLAYER
+		MODEL_BULLET,
+		MODEL_CUBE,
+		MODEL_ENEMY01,
+		MODEL_ENEMY02,
+		MODEL_ENEMY03,
+		MODEL_PLAYER,
+		MODEL_STAGE,
+		MODEL_SKYBOX,
 	};
 
 	static void Init();
