@@ -112,7 +112,7 @@ void Title::Uninit()
 void Title::Update()
 {
 	Scene::Update();
-	if (KeyBoard::IsTrigger(DIK_T) || GamePad::IsTrigger(0,BUTTON_2))
+	if (KeyBoard::IsTrigger(DIK_T) || GamePad::IsTrigger(0,BTN_2))
 	{
 		AppManager::SetScene<Game>();
 	}

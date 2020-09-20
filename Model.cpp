@@ -20,6 +20,7 @@ std::vector<std::string> Model::m_FileName{};
 // モデルの読み込み
 void Model::LoadObject(const char * FileName, MODEL * Model)
 {
+	
 	char dir[MAX_PATH];
 	strcpy(dir, FileName);
 	PathRemoveFileSpec(dir); // パスからファイル名を取り除く

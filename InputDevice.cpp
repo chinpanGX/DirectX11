@@ -247,57 +247,41 @@ void GamePad::Update()
 		// 32の各ビットに意味を持たせ、ボタン押下に応じてビットをオンにする long型デフォルト（32767ぐらい）
 		//	注意：XboxとPS4の入力を同時に接続しない
 
-		if (dijs.lY < 0)					m_padState[i] |= LEFTSTICK_UP;		// Xbox＆PS4:左スティックy-axis (forward)
-		if (dijs.lY > 0)					m_padState[i] |= LEFTSTICK_DOWN;	// Xbox＆PS4:左スティックy-axis (backward)
-		if (dijs.lX < 0)					m_padState[i] |= LEFTSTICK_LEFT;	// Xbox＆PS4:左スティックx-axis (left)
-		if (dijs.lX > 0)					m_padState[i] |= LEFTSTICK_RIGHT;	// Xbox＆PS4:左スティックx-axis (right)
+		if (dijs.lY < 0)					m_padState[i] |= LS_UP;		// Xbox＆PS4:左スティックy-axis (forward)
+		if (dijs.lY > 0)					m_padState[i] |= LS_DOWN;	// Xbox＆PS4:左スティックy-axis (backward)
+		if (dijs.lX < 0)					m_padState[i] |= LS_LEFT;	// Xbox＆PS4:左スティックx-axis (left)
+		if (dijs.lX > 0)					m_padState[i] |= LS_RIGHT;	// Xbox＆PS4:左スティックx-axis (right)
 
 		if (dijs.lRy < 16383)				m_padState[i] |= XboxRIGHTSTICK_UP;		// Xbox:右スティックy-axis (forward)
 		if (dijs.lRy > 49150)				m_padState[i] |= XboxRIGHTSTICK_DOWN;	// Xbox:右スティックy-axis (backward)
 		if (dijs.lRx < 16383)				m_padState[i] |= XboxRIGHTSTICK_LEFT;	// Xbox:右スティックx-axis (left)
 		if (dijs.lRx > 49150)				m_padState[i] |= XboxRIGHTSTICK_RIGHT;	// Xbox:右スティックx-axis (right)
 
-		if (dijs.lRz < 16383)				m_padState[i] |= PS4RIGHTSTICK_UP;		// PS4:右スティックy-axis (forward)
-		if (dijs.lRz > 49150)				m_padState[i] |= PS4RIGHTSTICK_DOWN;	// PS4:右スティックy-axis (backward)
-		if (dijs.lZ < 16383)				m_padState[i] |= PS4RIGHTSTICK_LEFT;	// PS4:右スティックx-axis (left)
-		if (dijs.lZ > 49150)				m_padState[i] |= PS4RIGHTSTICK_RIGHT;	// PS4:右スティックx-axis (right)
+		if (dijs.lRz < 16383)				m_padState[i] |= RS_UP;		// PS4:右スティックy-axis (forward)
+		if (dijs.lRz > 49150)				m_padState[i] |= RS_DOWN;	// PS4:右スティックy-axis (backward)
+		if (dijs.lZ < 16383)				m_padState[i] |= RS_LEFT;	// PS4:右スティックx-axis (left)
+		if (dijs.lZ > 49150)				m_padState[i] |= RS_RIGHT;	// PS4:右スティックx-axis (right)
 
 		if (dijs.lZ > 49150)				m_padState[i] |= TRIGGER_LT; // Xbox:LTトリガー
 		if (dijs.lZ < 16383)				m_padState[i] |= TRIGGER_RT; // Xbox:RTトリガー
-		if (dijs.lRx > 10000)				m_padState[i] |= TRIGGER_L2; // PS4:L2トリガー
-		if (dijs.lRy > 10000)				m_padState[i] |= TRIGGER_R2; // PS4:R2トリガー
-		if (dijs.rgbButtons[0] & 0x80)		m_padState[i] |= BUTTON_1;	// Xbox:Ａボタン PS4：□ボタン
-		if (dijs.rgbButtons[2] & 0x80)		m_padState[i] |= BUTTON_2;	// Xbox:Ｘボタン PS4：〇ボタン
-		//* Xbox:Ｂボタン	　PS4：×ボタン
-		if (dijs.rgbButtons[1] & 0x80)		m_padState[i] |= BUTTON_3;
-		//*	Xbox:Ｙボタン	　PS4：△ボタン
-		if (dijs.rgbButtons[3] & 0x80)		m_padState[i] |= BUTTON_4;
-		//* Xbox:LBボタン	　PS4：L1ボタン
-		if (dijs.rgbButtons[4] & 0x80)		m_padState[i] |= BUTTON_LB;
-		//* Xbox:RBボタン	　PS4：R1ボタン
-		if (dijs.rgbButtons[5] & 0x80)		m_padState[i] |= BUTTON_RB;
-		//* Xbox:BACKボタン 　PS4 : OPTIONボタン
-		if (dijs.rgbButtons[6] & 0x80)		m_padState[i] |= BUTTON_BACK;
-		//* Xbox:STARTボタン　PS4 : SHAREボタン
-		if (dijs.rgbButtons[7] & 0x80)		m_padState[i] |= BUTTON_START;
+		if (dijs.lRx > 10000)				m_padState[i] |= BTN_L2;	// PS4:L2トリガー
+		if (dijs.lRy > 10000)				m_padState[i] |= BTN_R2;	// PS4:R2トリガー
+		if (dijs.rgbButtons[0] & 0x80)		m_padState[i] |= BTN_1;		// Xbox:Ａボタン PS4：□ボタン
+		if (dijs.rgbButtons[2] & 0x80)		m_padState[i] |= BTN_2;		// Xbox:Ｘボタン PS4：〇ボタン
+		if (dijs.rgbButtons[1] & 0x80)		m_padState[i] |= BTN_3;		// Xbox:Ｂボタン	　PS4：×ボタン
+		if (dijs.rgbButtons[3] & 0x80)		m_padState[i] |= BTN_4;		// Xbox:Ｙボタン	　PS4：△ボタン
+		if (dijs.rgbButtons[4] & 0x80)		m_padState[i] |= BTN_L1;	// Xbox:LBボタン	　PS4：L1ボタン
+		if (dijs.rgbButtons[5] & 0x80)		m_padState[i] |= BTN_R1;	// Xbox:RBボタン	　PS4：R1ボタン
+		if (dijs.rgbButtons[6] & 0x80)		m_padState[i] |= BTN_OPTION;	// Xbox:BACKボタン 　PS4 : OPTIONボタン
+		if (dijs.rgbButtons[7] & 0x80)		m_padState[i] |= BTN_SHARE;		// Xbox:STARTボタン　PS4 : SHAREボタン
+		if (dijs.rgbButtons[8] & 0x80)		m_padState[i] |= BUTTON_L3; // Xbox:L3ボタン	
+		if (dijs.rgbButtons[9] & 0x80)		m_padState[i] |= BUTTON_R3; // Xbox:R3ボタン	
+		if (dijs.rgdwPOV[0] <= 0)									m_padState[i] |= POV_UP;	// Xbox＆PS4：方向キー上
+		if (dijs.rgdwPOV[0] <= 18000 && dijs.rgdwPOV[0] > 9000)		m_padState[i] |= POV_DOWN;  // Xbox＆PS4：方向キー下
+		if (dijs.rgdwPOV[0] <= 27000 && dijs.rgdwPOV[0] > 18000)	m_padState[i] |= POV_LEFT;  // Xbox＆PS4：方向キー左
+		if (dijs.rgdwPOV[0] <= 9000 && dijs.rgdwPOV[0] > 0)			m_padState[i] |= POV_RIGHT; // Xbox＆PS4：方向キー右
 
-		//! Xbox:L3ボタン	
-		if (dijs.rgbButtons[8] & 0x80)		m_padState[i] |= BUTTON_L3;
-		//! Xbox:R3ボタン	
-		if (dijs.rgbButtons[9] & 0x80)		m_padState[i] |= BUTTON_R3;
-
-		//* Xbox＆PS4：方向キー上
-		if (dijs.rgdwPOV[0] <= 0)									m_padState[i] |= BUTTON_UP;
-		//* Xbox＆PS4：方向キー下
-		if (dijs.rgdwPOV[0] <= 18000 && dijs.rgdwPOV[0] > 9000)		m_padState[i] |= BUTTON_DOWN;
-		//* Xbox＆PS4：方向キー左
-		if (dijs.rgdwPOV[0] <= 27000 && dijs.rgdwPOV[0] > 18000)	m_padState[i] |= BUTTON_LEFT;
-		//* Xbox＆PS4：方向キー右
-		if (dijs.rgdwPOV[0] <= 9000 && dijs.rgdwPOV[0] > 0)			m_padState[i] |= BUTTON_RIGHT;
-
-		// Trigger設定
-		m_padTrigger[i] = ((lastPadState ^ m_padState[i])	// 前回と違っていて
-			& m_padState[i]);					// しかも今ONのやつ
+		m_padTrigger[i] = ((lastPadState ^ m_padState[i]) & m_padState[i]);					// しかも今ONのやつ
 	}
 }
 
