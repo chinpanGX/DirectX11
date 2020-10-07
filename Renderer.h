@@ -1,94 +1,57 @@
 /*------------------------------------------------------------
 	
 	[Renderer.h]
-	DirectX11の関連処理を管理
+	2D描画用のクラス : Texture,Sprite,SpriteRenderer
 	Author : 出合翔太
 
 -------------------------------------------------------------*/
 #pragma once
-#include "Application.h"
+#include "Wrapper.h"
 
-// 頂点構造体
-struct VERTEX_3D
-{
-	D3DXVECTOR3 Position;
-	D3DXVECTOR3 Normal;
-	D3DXVECTOR4 Diffuse;
-	D3DXVECTOR2 TexCoord;
-};
-
-// マテリアル構造体
-struct MATERIAL
-{
-	D3DXCOLOR	Ambient;
-	D3DXCOLOR	Diffuse;
-	D3DXCOLOR	Specular;
-	D3DXCOLOR	Emission;
-	float		Shininess;
-	float		Dummy[3];//16byte境界用
-};
-
-// マテリアル構造体
-struct DX11_MODEL_MATERIAL
-{
-	MATERIAL		Material;
-	class CTexture*	Texture;
-};
-
-// 描画サブセット構造体
-struct DX11_SUBSET
-{
-	unsigned int	StartIndex;
-	unsigned int	IndexNum;
-	DX11_MODEL_MATERIAL	Material;
-};
-
-struct LIGHT
-{
-	BOOL		Enable;
-	BOOL		Dummy[3];//16byte境界用
-	D3DXVECTOR4	Direction;
-	D3DXCOLOR	Diffuse;
-	D3DXCOLOR	Ambient;
-};
-
-class Renderer
+// テクスチャクラス…テクスチャの管理
+class Texture
 {
 private:
-	static D3D_FEATURE_LEVEL       m_FeatureLevel;
-
-	static ID3D11Device*           m_Device;
-	static ID3D11DeviceContext*    m_ImmediateContext;
-	static IDXGISwapChain*         m_SwapChain;
-	static ID3D11RenderTargetView* m_RenderTargetView;
-	static ID3D11DepthStencilView* m_DepthStencilView;
-	   
-	static ID3D11VertexShader*     m_VertexShader;
-	static ID3D11PixelShader*      m_PixelShader;
-	static ID3D11InputLayout*      m_VertexLayout;
-	static ID3D11Buffer*			m_WorldBuffer;
-	static ID3D11Buffer*			m_ViewBuffer;
-	static ID3D11Buffer*			m_ProjectionBuffer;
-	static ID3D11Buffer*			m_MaterialBuffer;
-	static ID3D11Buffer*			m_LightBuffer;
-	
-	static ID3D11DepthStencilState* m_DepthStateEnable;
-	static ID3D11DepthStencilState* m_DepthStateDisable;
+	unsigned int m_ImageCount = 0; // テクスチャをカウント
+	ID3D11ShaderResourceView* m_Texture[256];
 public:
-	static void Init();
-	static void Uninit();
-	static void Begin();
-	static void End();
-
-	static void SetDepthEnable(bool Enable);
-	static void SetWorldViewProjection2D();
-	static void SetWorldMatrix(D3DXMATRIX * WorldMatrix);
-	static void SetViewMatrix(D3DXMATRIX * ViewMatrix);
-	static void SetProjectionMatrix(D3DXMATRIX * ProjectionMatrix);
-	static void SetMaterial(MATERIAL Material);
-	static void SetLight(LIGHT Light);
-
-	static ID3D11Device* GetDevice() { return m_Device; }
-	static ID3D11DeviceContext* GetDeviceContext() { return m_ImmediateContext; }
+	Texture();
+	~Texture() {};
+	unsigned int LoadTexture(Wrapper& dx, const char* FileName); // ロード
+	void Unload(unsigned int Texture);				// アンロード
+	ID3D11ShaderResourceView* SetTexture(unsigned int Texture); // セット
 };
+
+// スプライト…バッファや描画の処理を管理
+class Sprite
+{
+private:
+	ID3D11Buffer* m_VtxBuffer = NULL;
+	float m_Alpha = 1.0f;
+public:
+	void Init(Wrapper& dx);
+	void Uninit();
+	// DrawPosition : 実際に描画する画像の中心座標、DrawSize : 実際に描画するが画像サイズ、TexUpLeft,TexDownRight : 描画する元画像の大きさ,MAX1.0f
+	void Draw(Wrapper& dx, ID3D11ShaderResourceView* texture, D3DXVECTOR2 drawPosition, D3DXVECTOR2 drawSize, D3DXVECTOR2 texUpLeft, 
+		D3DXVECTOR2 texDownRight, D3DXCOLOR color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+	void SetAlpha(float alpha) { m_Alpha = alpha; }
+};
+
+
+#pragma region Class_SpriteRenderer
+// 2D用スプライトレンダラー…テクスチャ、スプライトをまとめたクラス
+class SpriteRenderer
+{
+private:
+	unsigned int m_Storage;
+	Wrapper& m_dx = Wrapper::Instance();
+	Texture m_Texture;
+	Sprite m_Sprite;
+public:
+	void Load(const char* Filename);
+	void Unload();
+	void Draw(D3DXVECTOR2 drawPosition, D3DXVECTOR2 drawSize, D3DXVECTOR2 texUpLeft, D3DXVECTOR2 texDownRight, D3DXCOLOR color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+	void SetAlpha(float alpha);
+};
+#pragma endregion 2D用スプライトレンダラー
 

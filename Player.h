@@ -5,8 +5,8 @@
 
 ---------------------------------------------------------------*/
 #pragma once
-#include "BaseGameObject.h"
-
+#include "GameObject.h"
+#include "Renderer.h"
 class Player : public GameObject
 {
 private:

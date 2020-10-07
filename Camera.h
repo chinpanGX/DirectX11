@@ -5,7 +5,8 @@
 
 ---------------------------------------------------------------*/
 #pragma once
-#include "BaseGameObject.h"
+#include "GameObject.h"
+#include "Renderer.h"
 
 #pragma region Declare_Class_Camera
 class Camera : public GameObject

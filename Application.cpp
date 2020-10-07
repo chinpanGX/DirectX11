@@ -6,7 +6,12 @@
 ----------------------------------------------------------*/
 #include "Application.h"
 #include "InputDevice.h"
-#include "AppManager.h"
+#include "Manager.h"
+#include <fbxsdk.h>
+
+#pragma comment(lib,"libfbxsdk.lib")
+#pragma comment(lib,"libxml2-mt.lib")
+#pragma comment(lib,"zlib-mt.lib")
 
 // グローバル変数
 const unsigned int g_WindowWidth = 1280;
@@ -83,7 +88,8 @@ void Application::AppRun()
 	dwExecLastTime = timeGetTime();
 	dwCurrentTime = 0;
 
-	AppManager::Init();
+	Manager::Init();
+	fbxsdk::FbxManager* fbx_manager = fbxsdk::FbxManager::Create();
 
 	// メッセージループ
 	MSG msg;
@@ -110,17 +116,18 @@ void Application::AppRun()
 				dwExecLastTime = dwCurrentTime;
 				// 更新処理
 				InputDevice::Update(); // コントローラの更新
-				AppManager::Update();
+				Manager::Update();
 				// 描画処理
-				AppManager::Draw();
+				Manager::Draw();
 			}
 		}
 	}
+	fbx_manager->Destroy();
 }
 
 void Application::Uninit()
 {
-	AppManager::Uninit();
+	Manager::Uninit();
 	InputDevice::Uninit();  // コントローラの終了処理 
 	timeEndPeriod(1); // 分解能を戻す
 	UnregisterClass(m_WindowClass.lpszClassName, m_WindowClass.hInstance); // ウィンドウクラスの登録を解除

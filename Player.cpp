@@ -38,14 +38,14 @@ void Player::Update()
 void Player::Draw()
 {
 	//マトリクス設定
+	auto dx = Wrapper::Instance();
 	D3DXMATRIX world, scale, rot, trans;
 	D3DXMatrixScaling(&scale, m_Scale.x, m_Scale.y, m_Scale.z);
 	D3DXMatrixRotationYawPitchRoll(&rot, m_Rotation.y, m_Rotation.x, m_Rotation.z);
 	//D3DXMatrixRotationQuaternion(&rot,&m_Quaternion);
 	D3DXMatrixTranslation(&trans, m_Position.x, m_Position.y, m_Position.z);
 	world = scale * rot * trans;
-
-	Renderer::SetWorldMatrix(&world);
+	dx.SetWorldMatrix(&world);
 
 	m_Model->Draw();
 }

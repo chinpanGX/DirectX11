@@ -6,7 +6,7 @@
 --------------------------------------------------------------*/
 #pragma once
 #include <vector>
-#include "Renderer.h"
+#include "Wrapper.h"
 
 // マテリアル構造体
 struct MODEL_MATERIAL
@@ -44,6 +44,7 @@ struct MODEL
 class Model
 {
 private:
+	Wrapper& m_dx = Wrapper::Instance();
 	ID3D11Buffer* m_VertexBuffer;
 	ID3D11Buffer* m_IndexBuffer;
 	SUBSET* m_SubsetArray;

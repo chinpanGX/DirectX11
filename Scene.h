@@ -10,10 +10,9 @@
 #include <vector>
 #include <typeinfo>
 #include <string>
+#include "GameObject.h"
 
-#include "BaseGameObject.h"
-#include "Bg.h"
-
+// レイヤーの列挙
 enum layer : int
 {
 	LAYER_CAMERA,
@@ -22,31 +21,7 @@ enum layer : int
 	LAYER_MAX
 };
 
-#pragma region Declare_Class_Fade
-class Fade : public BG
-{
-private:
-	float m_Alpha = 1.0f;	// a値
-public:
-	enum FadeState
-	{
-		FADE_NONE,
-		FADE_IN,
-		FADE_OUT
-	};
-	FadeState m_FadeState = FADE_NONE;
-	static class Scene* m_NextScene;
-
-	Fade() {}
-	~Fade() {}
-	void Init();
-	void Uninit();
-	void Update();
-	void Draw();
-};
-#pragma endregion Fadeクラスの宣言
-
-#pragma region Declare_Class_Scene
+#pragma region Class_Scene
 class Scene
 {
 protected:
@@ -139,10 +114,10 @@ public:
 };
 #pragma endregion Sceneクラスの宣言
 
-#pragma region Declare_Class_Game-public_Scene
+#pragma region class_Game-public_Scene
 class Game : public Scene
 {
-protected:
+private:
 	void Load()override;
 	void Unload()override;
 public:	 
@@ -152,10 +127,10 @@ public:
 };
 #pragma endregion Gameクラスの宣言：Sceneクラスを継承
 
-#pragma region Declare_class_Title-public_Scene
+#pragma region class_Title-public_Scene
 class Title : public Scene
 {
-protected:
+private:
 	void Load()override;
 	void Unload()override;
 public:
@@ -165,7 +140,3 @@ public:
 	void Draw()override;
 };
 #pragma endregion Titleクラスの宣言:Sceneクラスを継承 
-
-
-
-
