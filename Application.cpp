@@ -71,7 +71,7 @@ bool Application::Init(HINSTANCE hInstance)
 {
 	auto result = CoInitializeEx(0, COINITBASE_MULTITHREADED);
 	CreateGameWindow(m_hWnd, m_WindowClass); // ゲームウィンドウ
-	InputDevice::Init(hInstance,m_hWnd); // コントローラの初期化
+	InputDevice::Init(hInstance,m_hWnd);	 // コントローラの初期化
 	return true;
 }
 
@@ -129,7 +129,7 @@ void Application::Uninit()
 {
 	Manager::Uninit();
 	InputDevice::Uninit();  // コントローラの終了処理 
-	timeEndPeriod(1); // 分解能を戻す
+	timeEndPeriod(1);		// 分解能を戻す
 	UnregisterClass(m_WindowClass.lpszClassName, m_WindowClass.hInstance); // ウィンドウクラスの登録を解除
 }
 

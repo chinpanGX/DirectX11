@@ -7,6 +7,8 @@
 #include "Renderer.h"
 #include "Application.h"
 
+using namespace DirectX11Wrapper;
+
 #pragma region Define_Texture_Func
 Texture::Texture()
 {
@@ -14,7 +16,7 @@ Texture::Texture()
 }
 
 // ロード
-unsigned int Texture::LoadTexture(Wrapper& dx, const char * FileName)
+unsigned int Texture::LoadTexture(DirectX11& dx, const char * FileName)
 {
 	unsigned int texture = 0;
 	D3DX11CreateShaderResourceViewFromFile(dx.GetDevice(), FileName, NULL, NULL, &m_Texture[m_ImageCount++], NULL);
@@ -37,7 +39,7 @@ ID3D11ShaderResourceView* Texture::SetTexture(unsigned int Texture)
 
 
 #pragma region Define_Sprite_Func
-void Sprite::Init(Wrapper& dx)
+void Sprite::Init(DirectX11& dx)
 {
 	VERTEX_3D vertex[4];
 	{
@@ -82,7 +84,7 @@ void Sprite::Uninit()
 	m_VtxBuffer->Release();
 }
 
-void Sprite::Draw(Wrapper& dx, ID3D11ShaderResourceView * texture, D3DXVECTOR2 drawPosition, D3DXVECTOR2 drawSize, D3DXVECTOR2 texUpLeft, D3DXVECTOR2 texDownRight, D3DXCOLOR color)
+void Sprite::Draw(DirectX11& dx, ID3D11ShaderResourceView * texture, D3DXVECTOR2 drawPosition, D3DXVECTOR2 drawSize, D3DXVECTOR2 texUpLeft, D3DXVECTOR2 texDownRight, D3DXCOLOR color)
 {
 	//ライト無効
 	LIGHT light;

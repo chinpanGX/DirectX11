@@ -62,7 +62,7 @@ void Camera::Update()
 
 void Camera::Draw()
 {
-	auto dx = Wrapper::Instance();
+	auto dx = DirectX11Wrapper::DirectX11::Instance();
 	//ビューマトリクス設定
 	D3DXMatrixLookAtLH(&m_ViewMatrix, &m_Position, &m_Target,&D3DXVECTOR3(0.0f, 1.0f, 0.0f));
 

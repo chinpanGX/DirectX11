@@ -6,13 +6,13 @@
 --------------------------------------------------------------*/
 #pragma once
 #include <vector>
-#include "Wrapper.h"
+#include "DirectX11Wrapper.h"
 
 // マテリアル構造体
 struct MODEL_MATERIAL
 {
 	char						Name[256];
-	MATERIAL					Material;
+	DirectX11Wrapper::MATERIAL	Material;
 	char						TextureName[256];
 	ID3D11ShaderResourceView*	Texture;
 
@@ -30,7 +30,7 @@ struct SUBSET
 // モデル構造体
 struct MODEL
 {
-	VERTEX_3D		*VertexArray;
+	DirectX11Wrapper::VERTEX_3D		*VertexArray;
 	unsigned int	VertexNum;
 
 	unsigned int	*IndexArray;
@@ -44,7 +44,7 @@ struct MODEL
 class Model
 {
 private:
-	Wrapper& m_dx = Wrapper::Instance();
+	DirectX11Wrapper::DirectX11& m_dx = DirectX11Wrapper::DirectX11::Instance();
 	ID3D11Buffer* m_VertexBuffer;
 	ID3D11Buffer* m_IndexBuffer;
 	SUBSET* m_SubsetArray;

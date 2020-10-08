@@ -96,7 +96,7 @@ void Model::LoadObject(const char * FileName, MODEL * Model)
 	positionArray = new D3DXVECTOR3[positionNum];
 	normalArray = new D3DXVECTOR3[normalNum];
 	texcoordArray = new D3DXVECTOR2[texcoordNum];
-	Model->VertexArray = new VERTEX_3D[vertexNum];
+	Model->VertexArray = new DirectX11Wrapper::VERTEX_3D[vertexNum];
 	Model->VertexNum = vertexNum;
 	Model->IndexArray = new unsigned int[indexNum];
 	Model->IndexNum = indexNum;
@@ -365,7 +365,7 @@ void Model::Init()
 void Model::Draw()
 {
 	// 頂点バッファの設定
-	UINT stride = sizeof(VERTEX_3D);
+	UINT stride = sizeof(DirectX11Wrapper::VERTEX_3D);
 	UINT offset = 0;
 	m_dx.GetDeviceContext()->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
 	// インデックスバッファの設定
@@ -392,7 +392,7 @@ void Model::Load(const char* FileName)
 	D3D11_BUFFER_DESC vbd;
 	ZeroMemory(&vbd, sizeof(vbd));
 	vbd.Usage = D3D11_USAGE_DEFAULT;
-	vbd.ByteWidth = sizeof(VERTEX_3D) * model.VertexNum;
+	vbd.ByteWidth = sizeof(DirectX11Wrapper::VERTEX_3D) * model.VertexNum;
 	vbd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	vbd.CPUAccessFlags = 0;
 	D3D11_SUBRESOURCE_DATA vsd;

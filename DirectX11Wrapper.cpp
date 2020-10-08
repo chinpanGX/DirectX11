@@ -1,21 +1,21 @@
 /*-----------------------------------------------------------
-	
-	[Wrapper.cpp]
+
+	[DirectX11Wrapper.cpp]
 	Author : 出合翔太
 
 ------------------------------------------------------------*/
-#include "Wrapper.h"
+#include "DirectX11Wrapper.h"
 #include "Application.h"
 #include<io.h>
 
 // インスタンス生成
-Wrapper& Wrapper::Instance()
+DirectX11Wrapper::DirectX11& DirectX11Wrapper::DirectX11::Instance()
 {
-	static Wrapper instance;
+	static DirectX11Wrapper::DirectX11 instance;
 	return instance;
 }
 
-void Wrapper::Init()
+void DirectX11Wrapper::DirectX11::Init()
 {
 	HRESULT hr = S_OK;
 	auto &app = Application::Instance();
@@ -238,7 +238,7 @@ void Wrapper::Init()
 	SetMaterial(material);
 }
 
-void Wrapper::Uninit()
+void DirectX11Wrapper::DirectX11::Uninit()
 {
 	// オブジェクト解放
 	m_WorldBuffer->Release();
@@ -258,7 +258,7 @@ void Wrapper::Uninit()
 	m_Device->Release();
 }
 
-void Wrapper::Begin()
+void DirectX11Wrapper::DirectX11::Begin()
 {
 	// バックバッファクリア
 	float ClearColor[4] = { 0.3f, 1.0f, 0.3f, 1.0f };
@@ -266,12 +266,12 @@ void Wrapper::Begin()
 	m_ImmediateContext->ClearDepthStencilView(m_DepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
-void Wrapper::End()
+void DirectX11Wrapper::DirectX11::End()
 {
 	m_SwapChain->Present(1, 0);
 }
 
-void Wrapper::SetDepthEnable(bool Enable)
+void DirectX11Wrapper::DirectX11::SetDepthEnable(bool Enable)
 {
 	if (Enable)
 	{
@@ -283,7 +283,7 @@ void Wrapper::SetDepthEnable(bool Enable)
 	}
 }
 
-void Wrapper::SetWorldViewProjection2D()
+void DirectX11Wrapper::DirectX11::SetWorldViewProjection2D()
 {
 	auto &app = Application::Instance();
 	SIZE winsize = app.GetWindowSize();
@@ -305,33 +305,33 @@ void Wrapper::SetWorldViewProjection2D()
 	m_ImmediateContext->UpdateSubresource(m_ProjectionBuffer, 0, NULL, &projection, 0, 0);
 }
 
-void Wrapper::SetWorldMatrix(D3DXMATRIX * WorldMatrix)
+void DirectX11Wrapper::DirectX11::SetWorldMatrix(D3DXMATRIX * WorldMatrix)
 {
 	D3DXMATRIX world;
 	D3DXMatrixTranspose(&world, WorldMatrix);
 	m_ImmediateContext->UpdateSubresource(m_WorldBuffer, 0, NULL, &world, 0, 0);
 }
 
-void Wrapper::SetViewMatrix(D3DXMATRIX * ViewMatrix)
+void DirectX11Wrapper::DirectX11::SetViewMatrix(D3DXMATRIX * ViewMatrix)
 {
 	D3DXMATRIX view;
 	D3DXMatrixTranspose(&view, ViewMatrix);
 	m_ImmediateContext->UpdateSubresource(m_ViewBuffer, 0, NULL, &view, 0, 0);
 }
 
-void Wrapper::SetProjectionMatrix(D3DXMATRIX * ProjectionMatrix)
+void DirectX11Wrapper::DirectX11::SetProjectionMatrix(D3DXMATRIX * ProjectionMatrix)
 {
 	D3DXMATRIX projection;
 	D3DXMatrixTranspose(&projection, ProjectionMatrix);
 	m_ImmediateContext->UpdateSubresource(m_ProjectionBuffer, 0, NULL, &projection, 0, 0);
 }
 
-void Wrapper::SetMaterial(MATERIAL Material)
+void DirectX11Wrapper::DirectX11::SetMaterial(MATERIAL Material)
 {
 	m_ImmediateContext->UpdateSubresource(m_MaterialBuffer, 0, NULL, &Material, 0, 0);
 }
 
-void Wrapper::SetLight(LIGHT Light)
+void DirectX11Wrapper::DirectX11::SetLight(LIGHT Light)
 {
 	m_ImmediateContext->UpdateSubresource(m_LightBuffer, 0, NULL, &Light, 0, 0);
 }

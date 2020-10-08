@@ -9,13 +9,14 @@
 #include<memory>
 #include<vector>
 #include<map>
+#include "DirectX11Wrapper.h"
 
 class Manager
 {
 private:
 	static class Scene* m_Scene;
 	static class Fade m_Fade;
-	static class Wrapper& m_dx;
+	static class DirectX11Wrapper::DirectX11& m_dx;
 public:
 	static void Init();
 	static void Uninit();

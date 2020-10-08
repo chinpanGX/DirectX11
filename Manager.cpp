@@ -7,14 +7,13 @@
 #include "Manager.h"
 #include <time.h>
 #include "Model.h"
-#include "Wrapper.h"
 #include "Scene.h"
 #include "Bg.h"
 
 // スタティック変数
 Scene* Manager::m_Scene = NULL;
 Fade Manager::m_Fade;
-Wrapper& Manager::m_dx = Wrapper::Instance();
+DirectX11Wrapper::DirectX11& Manager::m_dx = DirectX11Wrapper::DirectX11::Instance();
 
 #pragma region Define_AppManager_Func
 // 初期化
@@ -49,7 +48,7 @@ void Manager::Draw()
 {
 	m_dx.Begin();
 	//3D用ライト設定
-	LIGHT light;
+	DirectX11Wrapper::LIGHT light;
 	light.Enable = true;
 	light.Direction = D3DXVECTOR4(1.0f, -1.0f, 1.0f, 0.0f);
 	D3DXVec4Normalize(&light.Direction, &light.Direction);

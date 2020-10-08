@@ -5,7 +5,7 @@
 
 --------------------------------------------------------------*/
 #pragma once
-#include "Wrapper.h"
+#include "DirectX11Wrapper.h"
 
 class GameObject
 {

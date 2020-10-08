@@ -1,0 +1,23 @@
+PS4コントローラ：マクロ定義メモ	
+左スティック↑	LS_UP
+左スティック↓	LS_DOWN
+左スティック←	LS_LEFT
+左スティック→	LS_RIGHT
+右スティック↑	RS_UP
+右スティック↓	RS_DOWN
+右スティック←	RS_LEFT
+右スティック→	RS_RIGHT
+方向キー↑	POV_UP
+方向キー↓	POV_DOWN
+方向キー←	POV_LEFT
+方向キー→	POV_RIGHT
+△	BTN_1
+〇	BTN_2
+×	BTN_3
+□	BTN_4
+L１	BTN_L1
+R１	BTN_R1
+L２	BTN_L2
+R２	BTN_R2
+OPTION	BTN_OPTION
+SHARE	BTN_SHARE
