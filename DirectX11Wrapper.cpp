@@ -165,11 +165,7 @@ void DirectX11Wrapper::DirectX11::Init()
 		};
 		UINT numElements = ARRAYSIZE(layout);
 
-		m_Device->CreateInputLayout(layout,
-			numElements,
-			buffer,
-			fsize,
-			&m_VertexLayout);
+		m_Device->CreateInputLayout(layout, numElements, buffer, fsize, &m_VertexLayout);
 
 		delete[] buffer;
 	}
