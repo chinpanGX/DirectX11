@@ -8,6 +8,8 @@
 #include "Manager.h"
 #include "Application.h"
 
+#pragma region FuncName_of_classBG_is_GetScrren
+// 基底クラスBG
 // スクリーンのゲッター
 D3DXVECTOR2 BG::GetScrren()
 {
@@ -16,11 +18,12 @@ D3DXVECTOR2 BG::GetScrren()
 	m_Scrren.y = (float)app.GetWindowSize().cy;
 	return m_Scrren;
 }
+#pragma endregion BGクラスの関数GetScrren()
 
 // フェードの処理
-// スタティック変数
-Scene* Fade::m_NextScene = NULL;
-#pragma region Define_Fade_Func
+#pragma region FuncName_of_classFade
+Scene* Fade::m_NextScene = NULL; // スタティック変数
+
 void Fade::Init()
 {
 	m_SpriteRenderer.Load("asset/Texture/black.png");
@@ -61,23 +64,23 @@ void Fade::Draw()
 
 // タイトルの処理
 #pragma region Define_TitleBG_Func
-void TitleBG::Init()
+void DrawBG::Title::Init()
 {
 	m_SpriteRenderer.Load("asset/texture/title01.png");
 }
 
-void TitleBG::Uninit()
+void DrawBG::Title::Uninit()
 {
 	m_SpriteRenderer.Unload();
 }
 
-void TitleBG::Update()
+void DrawBG::Title::Update()
 {
 
 }
 
-void TitleBG::Draw()
+void DrawBG::Title::Draw()
 {
 	m_SpriteRenderer.Draw(BG::GetScrren() * 0.5f, BG::GetScrren(), D3DXVECTOR2(0.0f, 0.0f), D3DXVECTOR2(1.0f, 1.0f));
 }
-#pragma endregion TitleBGの関数定義
+#pragma endregion Titleの関数定義

@@ -7,11 +7,6 @@
 #include "Application.h"
 #include "InputDevice.h"
 #include "Manager.h"
-#include <fbxsdk.h>
-
-#pragma comment(lib,"libfbxsdk.lib")
-#pragma comment(lib,"libxml2-mt.lib")
-#pragma comment(lib,"zlib-mt.lib")
 
 // グローバル変数
 const unsigned int g_WindowWidth = 1280;
@@ -89,7 +84,6 @@ void Application::AppRun()
 	dwCurrentTime = 0;
 
 	Manager::Init();
-	fbxsdk::FbxManager* fbx_manager = fbxsdk::FbxManager::Create();
 
 	// メッセージループ
 	MSG msg;
@@ -122,7 +116,6 @@ void Application::AppRun()
 			}
 		}
 	}
-	fbx_manager->Destroy();
 }
 
 void Application::Uninit()

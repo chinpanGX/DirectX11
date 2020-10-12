@@ -23,7 +23,7 @@ void Manager::Init()
 	m_dx.Init();
 	Model::Init();
 	m_Fade.Init();
-	SetScene<Title>();
+	SetScene<GameScene::Title>();
 	m_Fade.m_FadeState = m_Fade.FADE_IN;
 	ChangeScene(m_Fade.m_NextScene);
 }

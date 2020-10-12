@@ -21,6 +21,7 @@ enum layer : int
 	LAYER_MAX
 };
 
+// 基底クラスSceneクラス
 #pragma region Class_Scene
 class Scene
 {
@@ -114,29 +115,34 @@ public:
 };
 #pragma endregion Sceneクラスの宣言
 
+namespace GameScene
+{
+// Gameクラス
 #pragma region class_Game-public_Scene
-class Game : public Scene
-{
-private:
-	void Load()override;
-	void Unload()override;
-public:	 
-	void Init()override;
-	void Update()override;
-	void Draw()override;
-};
-#pragma endregion Gameクラスの宣言：Sceneクラスを継承
+	class Game : public Scene
+	{
+	private:
+		void Load()override;
+		void Unload()override;
+	public:
+		void Init()override;
+		void Update()override;
+		void Draw()override;
+	};
+#pragma endregion Gameクラスの宣言
 
+// Titleクラス
 #pragma region class_Title-public_Scene
-class Title : public Scene
-{
-private:
-	void Load()override;
-	void Unload()override;
-public:
-	void Init()override;
-	void Uninit()override;
-	void Update()override;
-	void Draw()override;
-};
-#pragma endregion Titleクラスの宣言:Sceneクラスを継承 
+	class Title : public Scene
+	{
+	private:
+		void Load()override;
+		void Unload()override;
+	public:
+		void Init()override;
+		void Uninit()override;
+		void Update()override;
+		void Draw()override;
+	};
+#pragma endregion Titleクラスの宣言
+}

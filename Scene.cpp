@@ -14,18 +14,18 @@
 
 #pragma region Define_Game_Func
 // ロード
-void Game::Load()
+void GameScene::Game::Load()
 {
 	
 }
 
 // アンロード
-void Game::Unload()
+void GameScene::Game::Unload()
 {
 }
 
 // 初期化
-void Game::Init()
+void GameScene::Game::Init()
 {
 	Load();
 	AddGameObject<Player>(LAYER_3D)->SetPosition(D3DXVECTOR3(0.0f, 0.0f, -5.0f));
@@ -33,38 +33,38 @@ void Game::Init()
 }
 
 // 更新
-void Game::Update()
+void GameScene::Game::Update()
 {
 	Scene::Update();
 }
 
 // 描画
-void Game::Draw()
+void GameScene::Game::Draw()
 {
 	Scene::Draw();
 }
 #pragma endregion Gameクラスの関数定義
 
 #pragma region Define_Title_Func
-void Title::Load()
+void GameScene::Title::Load()
 {
 }
 
-void Title::Unload()
+void GameScene::Title::Unload()
 {
 }
 
-void Title::Init()
+void GameScene::Title::Init()
 {
-	AddGameObject<TitleBG>(LAYER_2D);
+	AddGameObject<DrawBG::Title>(LAYER_2D);
 }
 
-void Title::Uninit()
+void GameScene::Title::Uninit()
 {
 	
 }
 
-void Title::Update()
+void GameScene::Title::Update()
 {
 	Scene::Update();
 	if (KeyBoard::IsTrigger(DIK_T) || GamePad::IsTrigger(0,BTN_2))
@@ -73,7 +73,7 @@ void Title::Update()
 	}
 }
 
-void Title::Draw()
+void GameScene::Title::Draw()
 {
 	Scene::Draw();
 }

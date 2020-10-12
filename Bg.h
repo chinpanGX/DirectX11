@@ -46,12 +46,15 @@ public:
 	void Draw();
 };
 
-// ƒ^ƒCƒgƒ‹”wŒi
-class TitleBG : public BG
+namespace DrawBG
 {
-public:
-	void Init()override;
-	void Uninit()override;
-	void Update()override;
-	void Draw()override;
-};
+	// ƒ^ƒCƒgƒ‹”wŒi
+	class Title : public BG
+	{
+	public:
+		void Init()override;
+		void Uninit()override;
+		void Update()override;
+		void Draw()override;
+	};
+}

@@ -10,13 +10,13 @@
 using namespace DirectX11Wrapper;
 
 #pragma region Define_Texture_Func
-Texture::Texture()
+Sprite2D::Texture::Texture()
 {
 	m_Texture[256] = NULL;
 }
 
 // ロード
-unsigned int Texture::LoadTexture(DirectX11& dx, const char * FileName)
+unsigned int Sprite2D::Texture::LoadTexture(DirectX11& dx, const char * FileName)
 {
 	unsigned int texture = 0;
 	D3DX11CreateShaderResourceViewFromFile(dx.GetDevice(), FileName, NULL, NULL, &m_Texture[m_ImageCount++], NULL);
@@ -25,13 +25,13 @@ unsigned int Texture::LoadTexture(DirectX11& dx, const char * FileName)
 }
 
 // アンロード
-void Texture::Unload(unsigned int Texture)
+void Sprite2D::Texture::Unload(unsigned int Texture)
 {
 	m_Texture[Texture]->Release();
 }
 
 // セット
-ID3D11ShaderResourceView* Texture::SetTexture(unsigned int Texture)
+ID3D11ShaderResourceView* Sprite2D::Texture::SetTexture(unsigned int Texture)
 {
 	return m_Texture[Texture];
 }
@@ -39,7 +39,7 @@ ID3D11ShaderResourceView* Texture::SetTexture(unsigned int Texture)
 
 
 #pragma region Define_Sprite_Func
-void Sprite::Init(DirectX11& dx)
+void Sprite2D::Sprite::Init(DirectX11& dx)
 {
 	VERTEX_3D vertex[4];
 	{
@@ -79,12 +79,12 @@ void Sprite::Init(DirectX11& dx)
 	dx.GetDevice()->CreateBuffer(&bd, &sd, &m_VtxBuffer);
 }
 
-void Sprite::Uninit()
+void Sprite2D::Sprite::Uninit()
 {
 	m_VtxBuffer->Release();
 }
 
-void Sprite::Draw(DirectX11& dx, ID3D11ShaderResourceView * texture, D3DXVECTOR2 drawPosition, D3DXVECTOR2 drawSize, D3DXVECTOR2 texUpLeft, D3DXVECTOR2 texDownRight, D3DXCOLOR color)
+void Sprite2D::Sprite::Draw(DirectX11& dx, ID3D11ShaderResourceView * texture, D3DXVECTOR2 drawPosition, D3DXVECTOR2 drawSize, D3DXVECTOR2 texUpLeft, D3DXVECTOR2 texDownRight, D3DXCOLOR color)
 {
 	//ライト無効
 	LIGHT light;

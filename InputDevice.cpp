@@ -6,7 +6,6 @@
 
 -------------------------------------------------------------*/
 #include "InputDevice.h"
-#include "Application.h"
 
 LPDIRECTINPUT8			InputDevice::m_Input = NULL;			//	DirectInputオブジェクト
 
